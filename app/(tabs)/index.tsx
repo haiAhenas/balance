@@ -1,11 +1,11 @@
 import Mybutton from '@/components/Mybutton';
-import { useInitDatabase } from '@/database/SQLiteDB';
+import { useInitDatabase } from '@/hooks/useInitDatabase';
 import { I18nManager, View } from 'react-native';
 
 export default function HomeScreen() {
-  useInitDatabase();
   I18nManager.forceRTL(true);
-
+  //deleteDatabase();
+  useInitDatabase();
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Mybutton
