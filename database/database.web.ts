@@ -1,4 +1,4 @@
-
+import { tableSchemas } from './variable';
 
 export let db: any;
 
@@ -10,21 +10,9 @@ export async function setupDatabase() {
 
   db = new SQL.Database();
 
-  db.run(`
-    CREATE TABLE IF NOT EXISTS transactions (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      item_type TEXT NOT NULL,
-      direction TEXT NOT NULL,
-      type TEXT,
-      karat TEXT,
-      weight REAL,
-      amount REAL,
-      currency TEXT DEFAULT 'SRA',
-      date TEXT,
-      party TEXT,
-      note TEXT
-    );
-  `);
+  for (const schema of tableSchemas) {
+    db.run(schema);
+  }
 
   const binaryArray = db.export();
   localStorage.setItem('sqlite_db', JSON.stringify(Array.from(binaryArray)));
